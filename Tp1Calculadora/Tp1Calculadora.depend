@@ -10,3 +10,14 @@
 
 1599502757 c:\users\velazco\documents\mik\utn\programacion-laboratorio\tps\tp1calculadora\calculosalgebraicos.h
 
+1599691698 source:c:\users\velazco\documents\mik\utn\programacion-laboratorio\tps\tp_laboratorio_1\tp1calculadora\calculosalgebraicos.c
+	<stdio.h>
+	"calculosAlgebraicos.h"
+
+1599691706 c:\users\velazco\documents\mik\utn\programacion-laboratorio\tps\tp_laboratorio_1\tp1calculadora\calculosalgebraicos.h
+
+1599691718 source:c:\users\velazco\documents\mik\utn\programacion-laboratorio\tps\tp_laboratorio_1\tp1calculadora\main.c
+	<stdio.h>
+	<stdlib.h>
+	"calculosAlgebraicos.h"
+

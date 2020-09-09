@@ -16,7 +16,7 @@ void MostrarOperaciones (char*, int,char,int);
 //hace:Imprime en pantalla las operaciones a realizar de fatoreo
 //entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar
 //devuelve: nada
-void MostrarOperaciones (char*, int,char,int);
+void MostrarOperacionesFactoreo (char*, int);
 
 //hace:Imprime en pantalla los resultados de las operaciones
 //entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar y resultado devuelto
