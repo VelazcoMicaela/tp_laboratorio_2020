@@ -3,64 +3,133 @@
 
 #endif // CALCULOSALGEBRAICOS_H_INCLUDED
 
-//hace:toma datos
-//entra: nada
-//devuelve: entero
+/** \brief toma datos
+ *
+ * \param nada
+ * \return entero ingresado por el usuario
+ *
+ */
 int TomarDatos (void);
 
-//hace:Imprime en pantalla las operaciones a realizar
-//entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar
-//devuelve: nada
+
+/** \brief Imprime en pantalla las operaciones a realizar
+ *
+ * \param array con la operacion a realizar
+ * \param int numero a operar
+ * \param char operador a realizar
+ * \param int numero a operar
+ * \return printf de la operacion a realizar
+ *
+ */
 void MostrarOperaciones (char*, int,char,int);
 
-//hace:Imprime en pantalla las operaciones a realizar de fatoreo
-//entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar
-//devuelve: nada
+
+/** \brief Imprime en pantalla las operaciones a realizar de fatoreo
+ *
+ * \param array con la operacion a realizar
+ * \param int numero a operar
+ * \return printf de la operacion a realizar
+ *
+ */
 void MostrarOperacionesFactoreo (char*, int);
 
-//hace:Imprime en pantalla los resultados de las operaciones
-//entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar y resultado devuelto
-//devuelve: nada
+
+/** \brief Imprime en pantalla los resultados de las operaciones
+ *
+ * \param array con la operacion a realizar
+ * \param int numero a operar
+ * \param char operador a realizar
+ * \param int numero a operar
+ * \param int resultado devuelto
+ * \return printf de la operacion realizada
+ *
+ */
 void ResultadoOperaciones (char* , int , char , int , int );
 
-//hace:Imprime en pantalla los resultados de la operacion dividir
-//entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar y resultado devuelto decimal
-//devuelve: nada
+
+/** \brief Imprime en pantalla los resultados de la operacion con flotante
+ *
+ * \param array con la operacion a realizar
+ * \param int numero a operar
+ * \param char operador a realizar
+ * \param int numero a operar
+ * \param float resultado devuelto flotante
+ * \return printf de la operacion realizada
+ *
+ */
 void ResultadoOperacionesFlotante (char* , int , char , int , float );
 
 
-//hace:Imprime en pantalla los resultados de la operacion dividir con el error
-//entra: array con la operacion a realizar, numero a operar, operador a realizar, numero a operar y resultado es array de error
-//devuelve: nada
+
+/** \brief Imprime en pantalla los resultados de la operacion dividir con el error
+ *
+ * \param array con la operacion a realizar
+ * \param int numero a operar
+ * \param char operador a realizar
+ * \param int numero a operar
+ * \param resultado es array de error
+ * \return printf de la funcion con error
+ *
+ */
 void ResultadoOperacionesError (char* , int , char , int , char* );
 
-//hace:Imprime en pantalla los resultados de las operaciones factoreo
-//entra: array con la operacion a realizar, numero a operar, resultado
-//devuelve: nada
-void ResultadoOperacionesFactoreo (char* , int , long int );
 
-//hace:Isuma dos numeros
-//entra: dos numeros enteros
-//devuelve: suma de dos numeros enteros
+/** \brief Imprime en pantalla los resultados de las operaciones factoreo con long
+ *
+ * \param array con la operacion a realizar
+ * \param int numero a operar
+ * \param long numero a resultado
+ * \return printf de la operacion realizada
+ *
+ */
+void ResultadoOperacionesFactoreo (char* , int , long );
+
+
+/** \brief suma dos numeros
+ *
+ * \param int numero
+ * \param int numero
+ * \return int suma de dos numeros
+ *
+ */
 int OperacionSumar (int, int);
 
-//hace:Resta dos numeros
-//entra: dos numeros enteros
-//devuelve: resta de dos numeros enteros
+
+/** \brief Resta dos numeros
+ *
+ * \param int numero
+ * \param int numero
+ * \return int Resta de dos numeros
+ *
+ */
 int OperacionRestar (int, int);
 
-//hace:division dos numeros
-//entra: dos numeros enteros
-//devuelve: division de dos numeros decimales
+
+/** \brief division dos numeros
+ *
+ * \param int numero
+ * \param int numero
+ * \return float division de dos numeros
+ *
+ */
 float OperacionDividir (int, int);
 
-//hace:multiplica dos numeros
-//entra: dos numeros enteros
-//devuelve: multiplicacion de dos numeros enteros
+
+/** \brief multiplica dos numeros
+ *
+ * \param int numero
+ * \param int numero
+ * \return int multiplica de dos numeros
+ *
+ */
 int OperacionMultiplicar (int, int);
 
-//hace:Factorea un numero
-//entra: un numero entero
-//devuelve: factoreo de un numero entero
-long int FactorearNumero(int);
+
+/** \brief Factorea un numero
+ *
+ * \param int numero
+ * \return long Factoreo de un numero
+ *
+ */
+long FactorearNumero(int);
 

@@ -36,9 +36,9 @@ void ResultadoOperacionesError (char* operadoresLetras , int num1, char operador
 }
 
 
-void ResultadoOperacionesFactoreo (char* operadoresLetras, int num1, long int resultado)
+void ResultadoOperacionesFactoreo (char* operadoresLetras, int num1, long resultado)
 {
-    printf("\n Resultado del %s de %d = %li",operadoresLetras,num1,resultado);
+    printf("\n Resultado del %s de %d = %ld",operadoresLetras,num1,resultado);
 }
 
 int OperacionSumar (int num1, int num2)
@@ -58,7 +58,6 @@ int OperacionRestar (int num1, int num2)
 float OperacionDividir (int num1, int num2)
 {
     float resultadoDivide;
-    char errorDivision;
 
     if(num2==0){
        resultadoDivide= 0;
@@ -66,8 +65,8 @@ float OperacionDividir (int num1, int num2)
     else
     {
         resultadoDivide=(float)num1/num2;
-        return resultadoDivide;
     }
+   return resultadoDivide;
 }
 
 int OperacionMultiplicar (int num1, int num2)
@@ -77,9 +76,9 @@ int OperacionMultiplicar (int num1, int num2)
     return resultadoMultiplica;
 }
 
-long int FactorearNumero(int num1)
+long FactorearNumero(int num1)
 {
-    long int factoreoNumeroFinal;
+    long factoreoNumeroFinal;
     int numeroAfactorear;
 
     factoreoNumeroFinal=1;
