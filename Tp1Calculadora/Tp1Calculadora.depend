@@ -21,3 +21,14 @@
 	<stdlib.h>
 	"calculosAlgebraicos.h"
 
+1601412572 source:c:\users\asus\documents\tps\tp_laboratorio_1\tp1calculadora\calculosalgebraicos.c
+	<stdio.h>
+	"calculosAlgebraicos.h"
+
+1601412572 c:\users\asus\documents\tps\tp_laboratorio_1\tp1calculadora\calculosalgebraicos.h
+
+1601412572 source:c:\users\asus\documents\tps\tp_laboratorio_1\tp1calculadora\main.c
+	<stdio.h>
+	<stdlib.h>
+	"calculosAlgebraicos.h"
+

@@ -61,6 +61,8 @@ void MostrarMenu()
     char seguirCargando;
     eEmployee listEmployee[LEN];
     int idNext=1;
+    int corroboracionMenu;
+
 
     VerificationFunctionInit(listEmployee,LEN);
 
@@ -88,42 +90,76 @@ void MostrarMenu()
                     system("cls");
 
                 }while(seguirCargando!='n');
-
+                corroboracionMenu=1;
             break;
 
             case 2:
-                system("cls");
-                VerificationFunctionModify(listEmployee, LEN);
-
+                if(corroboracionMenu==1)
+                {
+                    system("cls");
+                    VerificationFunctionModify(listEmployee, LEN);
+                    corroboracionMenu=2;
+                }
+                else
+                {
+                    system("cls");
+                    printf("------ Debe ingresar a la opcion 1 ------ \n");
+                }
             break;
 
             case 3:
-                system("cls");
-                VerificationFunctionRemove(listEmployee, LEN);
+                if(corroboracionMenu==2)
+                {
+                    system("cls");
+                    VerificationFunctionRemove(listEmployee, LEN);
+                    corroboracionMenu=3;
+                }
+                else
+                {
+                    system("cls");
+                    printf("------ Debe ingresar a la opcion 1 y 2 ------  \n");
+                }
+
+
             break;
 
             case 4:
-                printf("opcion cuatro\n");
 
-                do
+                if(corroboracionMenu==3)
                 {
-                    respuestaMenuCuatro=MenuCuatro();
+                    system("cls");
+                    printf("opcion cuatro\n");
 
-                    switch(respuestaMenuCuatro)
+                    do
                     {
-                        case 'a':
-                            printf("Hola soy A \n");
-                        break;
+                        respuestaMenuCuatro=MenuCuatro();
 
-                        case 'b':
-                            printf("Hola soy B \n");
-                        break;
+                        switch(respuestaMenuCuatro)
+                        {
+                            case 'a':
+                                system("cls");
+                                VerificationFunctionSort(listEmployee, LEN);
+                            break;
 
-                        default:
-                            printf("ERROR Ingrese A o B \n");
-                        break;
-                    }
-                }while(respuestaMenuCuatro!='a'&&respuestaMenuCuatro!='b');
+                            case 'b':
+                                system("cls");
+                                addSalary(listEmployee, LEN);
+                            break;
+
+                            default:
+                                printf("ERROR Ingrese A o B \n");
+                            break;
+                        }
+                        system("cls");
+                    }while(respuestaMenuCuatro!='a'&&respuestaMenuCuatro!='b');
+                    corroboracionMenu=4;
+                }
+                else
+                {
+                    system("cls");
+                    printf("------ Debe ingresar a la opcion 1, 2 y 3 ------  \n");
+                }
+
             break;
 
             case 5:
@@ -132,7 +168,7 @@ void MostrarMenu()
             break;
 
             default:
-                printf("ERROR, ingrese una opcion");
+                printf("ERROR, ingrese una opcion \n");
             break;
         }
      }while(salida!='s');

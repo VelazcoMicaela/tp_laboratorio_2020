@@ -19,6 +19,7 @@ int initEmployees(eEmployee list[], int len)
         for(i=0;i<len;i++)
         {
             list[i].isEmpty=1;
+
         }
 
        error=0;
@@ -29,7 +30,7 @@ int initEmployees(eEmployee list[], int len)
 
 void printAnEmploye(eEmployee anEmploye)
 {
-    printf("%5d %50s %50s %6.2f %4d \n", anEmploye.id,anEmploye.name,anEmploye.lastName,anEmploye.salary,anEmploye.sector);
+    printf("%5d %50s %50s %6.2f %2d \n", anEmploye.id,anEmploye.name,anEmploye.lastName,anEmploye.salary,anEmploye.sector);
 }
 
 int printEmployees(eEmployee list[], int len)
@@ -43,7 +44,7 @@ int printEmployees(eEmployee list[], int len)
 
     if(list!=NULL&&len>0)
     {
-        printf("   ID                                           Nombre                                            Apellido      Sueldo    Sector  \n");
+        printf("   ID                                           Nombre                                            Apellido  Sueldo  Sector  \n");
         for(i=0;i<len;i++)
        {
            if(list[i].isEmpty==0)
@@ -79,7 +80,7 @@ int addEmployees(eEmployee list[], int len, int id)
         }
         else
         {
-           list[index]=AddAnEmployeed(id);
+            list[index]=AddAnEmployeed(id);
 
            error=0;
         }
@@ -120,6 +121,7 @@ eEmployee AddAnEmployeed(int id)
 
     anEmployee.salary=GetFloat("Ingrese su salario: ","ERROR salario no puede ser un numero negativo ");
     anEmployee.sector=GetInt("Ingrese su sector: ","ERROR sector no puede ser un numero negativo ");
+
 
     system("cls");
 
@@ -222,6 +224,7 @@ void VerificationFunctionModify(eEmployee listEmployee[],int len)
 {
     int modificacion;
 
+
     modificacion=ModifyEmployeeById(listEmployee,LEN);
 
     if(modificacion==0)
@@ -264,6 +267,37 @@ void VerificationFunctionRemove(eEmployee listEmployee[],int len)
             printf("----- Modificacion cancelada por el usuario----- \n");
         }
 
+    }
+    printEmployees(listEmployee, LEN);
+}
+
+int ValidarRepuestaInt(char msg[],char errorMsg[])
+{
+    int salida;
+
+    printf("%s",msg);
+    scanf("%d",&salida);
+    while(salida!=1&&salida!=2)
+    {
+        printf("%s",errorMsg);
+        scanf("%d",&salida);
+    }
+    return salida;
+}
+
+void VerificationFunctionSort(eEmployee listEmployee[],int len)
+{
+    int order;
+
+    order=ValidarRepuestaInt(" Ingrese: 1- Ordenamiento ascendente, 2-Ordenamiento descendente "," ERROR Ingrese: 1- Ordenamiento ascendente, 2-Ordenamiento descendente ");
+
+    if(sortEmployees(listEmployee,LEN,order)==0)
+    {
+        printf("Ordenamiento Realizado \n");
+    }
+    else
+    {
+        printf("Fallo \n");
     }
     printEmployees(listEmployee, LEN);
 }
@@ -361,4 +395,102 @@ int RemoveEmployee(eEmployee list[],int len)
         }
     }
     return error;
+}
+
+int sortEmployees(eEmployee listEmployee[], int len, int order)
+{
+    int i;
+    int j;
+    int error=-1;
+
+        for(i=0;i<len-1;i++)
+        {
+            for(j=i+1;j<len;j++)
+            {
+               SortAscending(listEmployee, len, i, j, order);
+               SortDescending(listEmployee, len, i, j, order);
+            }
+        }
+      error=0;
+
+     return error;
+}
+
+void SortAscending(eEmployee listEmployee[], int len,int i, int j, int order)
+{
+    eEmployee auxEmployee;
+    if(strcmp(listEmployee[i].lastName,listEmployee[j].lastName)>0 &&order==1)
+    {
+        auxEmployee=listEmployee[i];
+        listEmployee[i]=listEmployee[j];
+        listEmployee[j]=auxEmployee;
+    }
+    else
+    {
+        if(strcmp(listEmployee[i].lastName,listEmployee[j].lastName)==0 &&order==1)
+        {
+            if(listEmployee[i].sector>listEmployee[j].sector)
+            {
+                auxEmployee=listEmployee[i];
+                listEmployee[i]=listEmployee[j];
+                listEmployee[j]=auxEmployee;
+            }
+        }
+    }
+}
+
+void SortDescending(eEmployee listEmployee[], int len,int i, int j, int order)
+{
+    eEmployee auxEmployee;
+
+    if(strcmp(listEmployee[i].lastName,listEmployee[j].lastName)<0 &&order==2)
+    {
+        auxEmployee=listEmployee[i];
+        listEmployee[i]=listEmployee[j];
+        listEmployee[j]=auxEmployee;
+    }
+    else
+    {
+        if(strcmp(listEmployee[i].lastName,listEmployee[j].lastName)==0 &&order==2)
+        {
+            if(listEmployee[i].sector<listEmployee[j].sector)
+            {
+                auxEmployee=listEmployee[i];
+                listEmployee[i]=listEmployee[j];
+                listEmployee[j]=auxEmployee;
+            }
+        }
+    }
+}
+
+void addSalary(eEmployee list[],int len)
+{
+    float promedio;
+    float accumulatorSalary=0;
+    int contadorEmpleados=0;
+    int contadorEmpleadosSupera=0;
+    int i;
+
+    for(i=0;i<len;i++)
+    {
+        accumulatorSalary=accumulatorSalary+list[i].salary;
+        if(list[i].isEmpty==0)
+        {
+            contadorEmpleados++;
+        }
+    }
+
+    promedio=accumulatorSalary/contadorEmpleados;
+
+    for(i=0;i<len;i++)
+    {
+        if(list[i].salary>promedio)
+        {
+            contadorEmpleadosSupera++;
+        }
+    }
+
+
+    printf("%6.2f \n",promedio);
+    printf("%d Superan el promedio de %6.2f \n",contadorEmpleadosSupera,promedio);
 }
