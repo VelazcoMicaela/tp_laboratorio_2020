@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "menu.h"
 #include "ArrayEmployees.h"
-#define LEN 5
+#define LEN 1000
 
 
 
@@ -38,11 +38,27 @@ char MenuCuatro()
     return opcion;
 }
 
+int MenuChange()
+{
+    int opcion;
+
+    printf("----- MODIFICAR -----\n");
+    printf("1- Nombre del empleado. \n");
+    printf("2- Apellido del empleado. \n");
+    printf("3- Salario del empleado  \n");
+    printf("4- Sector del empleado  \n");
+    printf("5- Volver al menu  \n");
+
+    opcion=GetInt("Ingrese una opcion: ","ERROR la opcion no puede ser un numero negativo ");
+
+    return opcion;
+}
+
 int Menu()
 {
     int opcion;
 
-    printf("Seleccione una opcion \n");
+    printf("----- Seleccione una opcion -----\n");
     printf("1- Altas de empleados \n");
     printf("2- Modificar empleado por Id \n");
     printf("3- Bajas de empleados\n");
@@ -61,7 +77,7 @@ void MostrarMenu()
     char seguirCargando;
     eEmployee listEmployee[LEN];
     int idNext=1;
-    int corroboracionMenu;
+
 
 
     VerificationFunctionInit(listEmployee,LEN);
@@ -90,43 +106,21 @@ void MostrarMenu()
                     system("cls");
 
                 }while(seguirCargando!='n');
-                corroboracionMenu=1;
             break;
 
             case 2:
-                if(corroboracionMenu==1)
-                {
                     system("cls");
                     VerificationFunctionModify(listEmployee, LEN);
-                    corroboracionMenu=2;
-                }
-                else
-                {
-                    system("cls");
-                    printf("------ Debe ingresar a la opcion 1 ------ \n");
-                }
             break;
 
             case 3:
-                if(corroboracionMenu==2)
-                {
                     system("cls");
                     VerificationFunctionRemove(listEmployee, LEN);
-                    corroboracionMenu=3;
-                }
-                else
-                {
-                    system("cls");
-                    printf("------ Debe ingresar a la opcion 1 y 2 ------  \n");
-                }
-
 
             break;
 
             case 4:
 
-                if(corroboracionMenu==3)
-                {
                     system("cls");
                     printf("opcion cuatro\n");
 
@@ -150,15 +144,8 @@ void MostrarMenu()
                                 printf("ERROR Ingrese A o B \n");
                             break;
                         }
-                        system("cls");
+
                     }while(respuestaMenuCuatro!='a'&&respuestaMenuCuatro!='b');
-                    corroboracionMenu=4;
-                }
-                else
-                {
-                    system("cls");
-                    printf("------ Debe ingresar a la opcion 1, 2 y 3 ------  \n");
-                }
 
             break;
 

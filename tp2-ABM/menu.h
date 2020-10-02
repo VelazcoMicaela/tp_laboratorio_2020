@@ -7,5 +7,6 @@ char IngresarDatoChar();
 void MostrarMenu();
 char MenuCuatro();
 char ValidarRepuesta(char msg[],char errorMsg[]);
+int MenuChange();
 
 #endif // MENU_H_INCLUDED

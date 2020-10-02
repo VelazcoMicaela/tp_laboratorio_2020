@@ -5,12 +5,12 @@
 #include "menu.h"
 #include "ArrayEmployees.h"
 #define TAMNOMAPE 51
-#define LEN 5
+#define LEN 1000
 
 
 int initEmployees(eEmployee list[], int len)
 {
-     int error;
+    int error;
     int i;
     error=1;
 
@@ -19,9 +19,7 @@ int initEmployees(eEmployee list[], int len)
         for(i=0;i<len;i++)
         {
             list[i].isEmpty=1;
-
         }
-
        error=0;
     }
 
@@ -30,7 +28,7 @@ int initEmployees(eEmployee list[], int len)
 
 void printAnEmploye(eEmployee anEmploye)
 {
-    printf("%5d %50s %50s %6.2f %2d \n", anEmploye.id,anEmploye.name,anEmploye.lastName,anEmploye.salary,anEmploye.sector);
+    printf("%5d %50s %50s    %.2f %2d \n", anEmploye.id,anEmploye.name,anEmploye.lastName,anEmploye.salary,anEmploye.sector);
 }
 
 int printEmployees(eEmployee list[], int len)
@@ -44,7 +42,7 @@ int printEmployees(eEmployee list[], int len)
 
     if(list!=NULL&&len>0)
     {
-        printf("   ID                                           Nombre                                            Apellido  Sueldo  Sector  \n");
+        printf("   ID                                           Nombre                                            Apellido     Sueldo     Sector  \n");
         for(i=0;i<len;i++)
        {
            if(list[i].isEmpty==0)
@@ -56,7 +54,7 @@ int printEmployees(eEmployee list[], int len)
 
         if(flag==0)
         {
-           printf("No hay lugar \n");
+           printf("No hay Empleados para mostrar \n");
         }
 
        error=0;
@@ -132,17 +130,28 @@ int GetInt(char msg[],char msgError[])
 {
    int dato;
     printf("%s",msg);
-    fflush(stdin);
-    scanf("%d",&dato);
+    dato=IngresarDatoEntero();
 
    while(dato<0)//
    {
        printf("%s",msgError);
-       fflush(stdin);
-       scanf("%d",&dato);
+       dato=IngresarDatoEntero();
    }
 
    return dato;
+}
+int ValidarRepuestaInt(char msg[],char errorMsg[])
+{
+    int salida;
+
+    printf("%s",msg);
+    salida=IngresarDatoEntero();
+    while(salida!=1&&salida!=2)
+    {
+        printf("%s",errorMsg);
+        salida=IngresarDatoEntero();
+    }
+    return salida;
 }
 
 float GetFloat(char msg[],char msgError[])
@@ -163,18 +172,22 @@ float GetFloat(char msg[],char msgError[])
    return numIngresado;
 }
 
+
 void GetString(char dato[], char msg[],char msgError[], int len)
 {
     char buffer[len];
     int i;
     int tam;
+    int alpha;
 
-    printf("%s",msg);
+   /* printf("%s",msg);
     fflush(stdin);
     scanf("%[^\n]",buffer);
+
     strlwr(buffer);
 
     tam=strlen(buffer);
+
 
     buffer[0]=toupper(buffer[0]);
 
@@ -184,14 +197,22 @@ void GetString(char dato[], char msg[],char msgError[], int len)
         {
             buffer[i+1]=toupper(buffer[i+1]);
         }
-    }
 
-   while(strlen(buffer)>len-1)//mide el largo de la cadena
+        if(!isalpha(buffer[i]))
+        {
+            printf("ERROR Ingrese solo letras \n");
+            break;
+        }
+    }*/
+
+
+   do
    {
-        printf("%s",msgError);
+        printf("%s",msg);
         fflush(stdin);
         scanf("%[^\n]",buffer);
         strlwr(buffer);
+
 
         tam=strlen(buffer);
 
@@ -203,8 +224,13 @@ void GetString(char dato[], char msg[],char msgError[], int len)
             {
                 buffer[i+1]=toupper(buffer[i+1]);
             }
+           /* if(!isalpha(buffer[i]))
+            {
+                printf("ERROR Ingrese solo letras \n");
+                break;
+            }*/
         }
-   }
+   }while(strlen(buffer)>len-1);
    strcpy (dato, buffer);
 }
 
@@ -224,7 +250,6 @@ void VerificationFunctionModify(eEmployee listEmployee[],int len)
 {
     int modificacion;
 
-
     modificacion=ModifyEmployeeById(listEmployee,LEN);
 
     if(modificacion==0)
@@ -241,10 +266,87 @@ void VerificationFunctionModify(eEmployee listEmployee[],int len)
         {
             printf("----- Modificacion cancelada por el usuario----- \n");
         }
-
     }
     printEmployees(listEmployee, LEN);
 }
+
+void MenuChangeSwitch(eEmployee list[], int len, int i)
+{
+    char changeName[51];
+    char changeLastName[51];
+    float changeSalary;
+    int changeSector;
+    char salida;
+
+    do{
+        switch(MenuChange())
+        {
+            case 1:
+                system("cls");
+                GetString(changeName,"Ingrese el nombre: ","ERROR nombre muy largo ",51);
+                strcpy(list[i].name,changeName);
+                printEmployees(list, len);
+                break;
+
+            case 2:
+                system("cls");
+                GetString(changeLastName,"Ingrese el apellido: ","ERROR apellido muy largo ",51);
+                strcpy(list[i].lastName,changeLastName);
+                printEmployees(list, len);
+                break;
+
+            case 3:
+                system("cls");
+                changeSalary=GetFloat("Ingrese el salario: ","ERROR salario no puede ser negativo ");
+                list[i].salary=changeSalary;
+                printEmployees(list, len);
+                break;
+
+            case 4:
+                system("cls");
+                changeSector=GetInt("Ingrese el sector: ","ERROR sector no puede ser negativo ");
+                list[i].sector=changeSector;
+                printEmployees(list, len);
+                break;
+
+            case 5:
+                system("cls");
+                salida=ValidarRepuesta("Seguro que desea salir?S-N ","ERROR Ingrese S para salir o N para volver al menu ");
+                break;
+
+            default:
+                printf("No es un num valido \n");
+                break;
+        }
+    }while(salida!='s');
+}
+
+int ModifyEmployeeById(eEmployee list[], int len)
+{
+    int error=-1;
+    int index;
+    int id;
+
+    if(list!=NULL&&len>0)
+    {
+        printEmployees(list, len);
+        id=GetInt("Ingrese Id a modificar: ","ERROR Id no puede ser un numero negativo  \n");
+        index=FindEmployeeById(list,len,id);
+
+        if(index==-1)
+        {
+            printf("No hay ningun id con ese numero \n");
+            system("cls");
+        }
+        else
+        {
+            MenuChangeSwitch(list, len,index);
+            error=0;
+        }
+    }
+    return error;
+}
+
 
 void VerificationFunctionRemove(eEmployee listEmployee[],int len)
 {
@@ -271,19 +373,6 @@ void VerificationFunctionRemove(eEmployee listEmployee[],int len)
     printEmployees(listEmployee, LEN);
 }
 
-int ValidarRepuestaInt(char msg[],char errorMsg[])
-{
-    int salida;
-
-    printf("%s",msg);
-    scanf("%d",&salida);
-    while(salida!=1&&salida!=2)
-    {
-        printf("%s",errorMsg);
-        scanf("%d",&salida);
-    }
-    return salida;
-}
 
 void VerificationFunctionSort(eEmployee listEmployee[],int len)
 {
@@ -303,7 +392,6 @@ void VerificationFunctionSort(eEmployee listEmployee[],int len)
 }
 
 
-
 int FindEmployeeById(eEmployee list[], int len,int id)
 {
     int index=-1;
@@ -317,45 +405,6 @@ int FindEmployeeById(eEmployee list[], int len,int id)
         }
     }
     return index;
-}
-
-int ModifyEmployeeById(eEmployee list[], int len)
-{
-    int error=-1;
-    int indice;
-    int id;
-    char confirm;
-
-    if(list!=NULL&&len>0)
-    {
-        printEmployees(list, len);
-        id=GetInt("Ingrese Id a modificar: ","ERROR Id no puede ser un numero negativo ");
-        indice=FindEmployeeById(list,len,id);
-
-        if(indice==-1)
-        {
-            printf("No hay ningun id con ese numero \n");
-            system("cls");
-        }
-        else
-        {
-            printAnEmploye(list[indice]);
-            confirm=ValidarRepuesta("Desea modificar este empleado?S-N ","ERROR Ingrese S para modificar o N para volver \n ");
-            system("cls");
-
-            if(confirm=='s')
-            {
-                list[indice]=AddAnEmployeed(id);
-
-                error=0;
-            }
-            else
-            {
-                error=2;
-            }
-        }
-    }
-    return error;
 }
 
 int RemoveEmployee(eEmployee list[],int len)
@@ -490,7 +539,6 @@ void addSalary(eEmployee list[],int len)
         }
     }
 
-
-    printf("%6.2f \n",promedio);
-    printf("%d Superan el promedio de %6.2f \n",contadorEmpleadosSupera,promedio);
+    printf("%.2f \n",promedio);
+    printf("%d Superan el promedio de %.2f \n",contadorEmpleadosSupera,promedio);
 }
