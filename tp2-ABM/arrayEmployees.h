@@ -190,7 +190,7 @@ void GetString(char dato[], char msg[],char msgError[], int len);
  *
  * \param msg[] char
  * \param msgError[] char
- * \return void
+ * \return float
  *
  */
 float GetFloat(char msg[],char msgError[]);
@@ -199,7 +199,7 @@ float GetFloat(char msg[],char msgError[]);
  *
  * \param msg[] char
  * \param msgError[] char
- * \return void
+ * \return int
  *
  */
 int GetInt(char msg[],char msgError[]);
@@ -208,11 +208,19 @@ int GetInt(char msg[],char msgError[]);
  *
  * \param msg[] char
  * \param msgError[] char
- * \return void
+ * \return int
  *
  */
 int ValidarRepuestaInt(char msg[],char errorMsg[]);
 
+/** \brief menu change data employee
+ *
+ * \param list[] eEmployee
+ * \param len int
+ * \param i int
+ * \return void
+ *
+ */
 void MenuChangeSwitch(eEmployee list[], int len, int i);
 
 #endif // ARRAYEMPLOYEES_H_INCLUDED

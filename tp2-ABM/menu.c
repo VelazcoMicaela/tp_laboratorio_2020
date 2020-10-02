@@ -25,6 +25,7 @@ char IngresarDatoChar()
 
     return salida;
 }
+
 char MenuCuatro()
 {
     char opcion;
