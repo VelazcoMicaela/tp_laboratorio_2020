@@ -175,19 +175,16 @@ float GetFloat(char msg[],char msgError[])
 
 void GetString(char dato[], char msg[],char msgError[], int len)
 {
-    char buffer[len];
+    char buffer[35];
     int i;
     int tam;
-    int alpha;
 
-   /* printf("%s",msg);
+    printf("%s",msg);
     fflush(stdin);
     scanf("%[^\n]",buffer);
-
     strlwr(buffer);
 
     tam=strlen(buffer);
-
 
     buffer[0]=toupper(buffer[0]);
 
@@ -197,22 +194,14 @@ void GetString(char dato[], char msg[],char msgError[], int len)
         {
             buffer[i+1]=toupper(buffer[i+1]);
         }
+    }
 
-        if(!isalpha(buffer[i]))
-        {
-            printf("ERROR Ingrese solo letras \n");
-            break;
-        }
-    }*/
-
-
-   do
+   while(strlen(buffer)>len-1)//mide el largo de la cadena
    {
-        printf("%s",msg);
+        printf("%s",msgError);
         fflush(stdin);
         scanf("%[^\n]",buffer);
         strlwr(buffer);
-
 
         tam=strlen(buffer);
 
@@ -224,15 +213,11 @@ void GetString(char dato[], char msg[],char msgError[], int len)
             {
                 buffer[i+1]=toupper(buffer[i+1]);
             }
-           /* if(!isalpha(buffer[i]))
-            {
-                printf("ERROR Ingrese solo letras \n");
-                break;
-            }*/
         }
-   }while(strlen(buffer)>len-1);
+   }
    strcpy (dato, buffer);
 }
+
 
 void VerificationFunctionInit(eEmployee listEmployee[],int len)
 {
