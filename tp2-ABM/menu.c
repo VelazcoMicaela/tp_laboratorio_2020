@@ -22,6 +22,7 @@ char IngresarDatoChar()
 
     fflush(stdin);
     scanf("%c",&salida);
+    salida=tolower(salida);
 
     return salida;
 }
@@ -168,12 +169,12 @@ char ValidarRepuesta(char msg[],char errorMsg[])
 
     printf("%s",msg);
     salida=IngresarDatoChar();
-    salida=tolower(salida);
+
     while(salida!='n'&&salida!='s')
     {
         printf("%s",errorMsg);
         salida=IngresarDatoChar();
-        salida=tolower(salida);
+
     }
     return salida;
 }

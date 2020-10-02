@@ -28,7 +28,7 @@ int initEmployees(eEmployee list[], int len)
 
 void printAnEmploye(eEmployee anEmploye)
 {
-    printf("%5d %50s %50s    %.2f %2d \n", anEmploye.id,anEmploye.name,anEmploye.lastName,anEmploye.salary,anEmploye.sector);
+    printf("%5d %50s %50s    %.2f    %2d \n", anEmploye.id,anEmploye.name,anEmploye.lastName,anEmploye.salary,anEmploye.sector);
 }
 
 int printEmployees(eEmployee list[], int len)
@@ -175,20 +175,18 @@ float GetFloat(char msg[],char msgError[])
 
 void GetString(char dato[], char msg[],char msgError[], int len)
 {
-    char buffer[35];
+    char buffer[len];
     int i;
-    int tam;
 
     printf("%s",msg);
     fflush(stdin);
     scanf("%[^\n]",buffer);
     strlwr(buffer);
 
-    tam=strlen(buffer);
 
     buffer[0]=toupper(buffer[0]);
 
-    for(i=0;i<tam;i++)
+    for(i=0;i<len;i++)
     {
         if(isspace(buffer[i]))
         {
@@ -203,11 +201,10 @@ void GetString(char dato[], char msg[],char msgError[], int len)
         scanf("%[^\n]",buffer);
         strlwr(buffer);
 
-        tam=strlen(buffer);
 
         buffer[0]=toupper(buffer[0]);
 
-        for(i=0;i<tam;i++)
+        for(i=0;i<len;i++)
         {
             if(isspace(buffer[i]))
             {
@@ -507,9 +504,9 @@ void addSalary(eEmployee list[],int len)
 
     for(i=0;i<len;i++)
     {
-        accumulatorSalary=accumulatorSalary+list[i].salary;
         if(list[i].isEmpty==0)
         {
+            accumulatorSalary=accumulatorSalary+list[i].salary;
             contadorEmpleados++;
         }
     }
@@ -518,12 +515,12 @@ void addSalary(eEmployee list[],int len)
 
     for(i=0;i<len;i++)
     {
-        if(list[i].salary>promedio)
+        if(list[i].salary>promedio&&list[i].isEmpty==0)
         {
             contadorEmpleadosSupera++;
         }
     }
 
-    printf("%.2f \n",promedio);
-    printf("%d Superan el promedio de %.2f \n",contadorEmpleadosSupera,promedio);
+    printf("El promedio es= %.2f \n",promedio);
+    printf("%d Empleados superan el promedio de %.2f \n",contadorEmpleadosSupera,promedio);
 }
